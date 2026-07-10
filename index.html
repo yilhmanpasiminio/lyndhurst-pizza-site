@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lyndhurst Pizza — Order online for pickup or delivery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --crust:#241713;
+    --crust-2:#33221c;
+    --cream:#FBF3E7;
+    --cream-2:#F3E8D6;
+    --tomato:#C1392B;
+    --tomato-dark:#8f2a20;
+    --basil:#445E3C;
+    --gold:#D9A441;
+    --ink:#2A211D;
+    --ink-soft:#6b5d54;
+    --paper:#FFFDF8;
+    --line: rgba(42,33,29,0.14);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    color:var(--crust);
+    margin:0;
+  }
+  .mono{font-family:'JetBrains Mono', monospace;}
+  a{color:inherit;}
+  button{font-family:inherit;cursor:pointer;}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky; top:0; z-index:40;
+    background:var(--crust);
+    color:var(--cream);
+    border-bottom:3px solid var(--gold);
+  }
+  .header-inner{
+    max-width:1120px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px;
+    gap:16px;
+  }
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-mark{
+    width:44px;height:44px;border-radius:50%;
+    background:var(--tomato);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif; font-weight:700; font-size:20px; color:var(--cream);
+    border:2px solid var(--gold);
+    flex-shrink:0;
+  }
+  .brand-text .name{font-size:20px; font-weight:600; color:var(--cream); font-family:'Fraunces',serif; line-height:1.1;}
+  .brand-text .sub{font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--gold); margin-top:2px;}
+  nav.main-nav{display:flex; gap:26px; font-size:14px;}
+  nav.main-nav a{text-decoration:none; color:var(--cream-2); opacity:.85; padding-bottom:4px; border-bottom:2px solid transparent;}
+  nav.main-nav a:hover{opacity:1; border-color:var(--gold);}
+  .header-actions{display:flex; align-items:center; gap:14px;}
+  .status-pill{
+    font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+    background:rgba(217,164,65,0.15); color:var(--gold);
+    border:1px solid rgba(217,164,65,0.4);
+    padding:4px 10px; border-radius:20px; white-space:nowrap;
+  }
+  .cart-btn{
+    position:relative;
+    background:var(--tomato); color:var(--cream);
+    border:none; border-radius:10px;
+    padding:9px 14px; font-size:13px; font-weight:500;
+    display:flex; align-items:center; gap:8px;
+  }
+  .cart-btn .count{
+    background:var(--cream); color:var(--tomato-dark);
+    font-family:'JetBrains Mono',monospace; font-weight:700;
+    border-radius:50%; width:20px;height:20px;
+    display:flex;align-items:center;justify-content:center; font-size:11px;
+  }
+
+  /* ---------- ADMIN BAR ---------- */
+  .admin-bar{
+    display:none;
+    background:var(--basil); color:var(--cream);
+    font-size:13px;
+  }
+  .admin-bar.on{display:block;}
+  .admin-bar-inner{
+    max-width:1120px; margin:0 auto; padding:10px 24px;
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  }
+  .admin-bar b{font-size:13px;}
+  .admin-bar .draft-flag{
+    background:rgba(251,243,231,0.18); border:1px solid rgba(251,243,231,0.4);
+    border-radius:12px; padding:2px 10px; font-size:11px;
+  }
+  .abtn{
+    background:var(--cream); color:var(--basil); border:none; border-radius:8px;
+    padding:7px 13px; font-size:12.5px; font-weight:600;
+  }
+  .abtn.ghost{background:transparent; color:var(--cream); border:1px solid rgba(251,243,231,0.45);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; overflow:hidden;
+    background:var(--crust);
+    color:var(--cream);
+    padding:72px 24px 96px;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image: radial-gradient(circle, rgba(217,164,65,0.09) 1.5px, transparent 1.5px);
+    background-size: 26px 26px;
+    opacity:.6;
+  }
+  .hero-inner{max-width:1120px; margin:0 auto; position:relative; display:grid; grid-template-columns:1.2fr 0.8fr; gap:48px; align-items:center;}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:18px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--gold);}
+  .hero h1{font-size:54px; font-weight:600; line-height:1.02; letter-spacing:-0.01em; color:var(--cream);}
+  .hero h1 em{font-style:italic; color:var(--gold); font-weight:500;}
+  .hero p.lede{font-size:17px; color:var(--cream-2); opacity:.88; max-width:460px; margin:22px 0 30px;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    border:none; border-radius:10px; padding:14px 24px; font-size:14px; font-weight:600;
+    text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{background:var(--tomato); color:var(--cream);}
+  .btn-ghost{background:transparent; color:var(--cream); border:1px solid rgba(251,243,231,0.35);}
+  .hero-stats{display:flex; gap:28px; margin-top:40px;}
+  .hero-stats div{border-left:2px solid var(--gold); padding-left:12px;}
+  .hero-stats .num{font-family:'Fraunces',serif; font-size:24px; color:var(--cream);}
+  .hero-stats .lbl{font-size:11px; color:var(--cream-2); opacity:.7; text-transform:uppercase; letter-spacing:.06em;}
+
+  .ticket{
+    background:var(--paper); color:var(--ink);
+    border-radius:4px; padding:22px 22px 26px;
+    font-family:'JetBrains Mono', monospace; font-size:12.5px;
+    box-shadow:0 24px 60px rgba(0,0,0,0.35);
+    transform:rotate(2.2deg);
+    position:relative;
+  }
+  .ticket::before, .ticket::after{
+    content:""; position:absolute; left:0; right:0; height:12px;
+    background: radial-gradient(circle, var(--crust) 6px, transparent 6.5px);
+    background-size:16px 16px; background-position:0 -2px;
+  }
+  .ticket::before{top:-6px;}
+  .ticket::after{bottom:-6px; transform:rotate(180deg);}
+  .ticket h3{font-family:'Fraunces',serif; font-size:16px; text-align:center; margin-bottom:2px;}
+  .ticket .tsub{text-align:center; color:var(--ink-soft); font-size:10.5px; margin-bottom:14px;}
+  .ticket hr{border:none; border-top:1px dashed var(--line); margin:10px 0;}
+  .ticket .row{display:flex; justify-content:space-between; margin:4px 0; gap:12px;}
+  .ticket .tot{font-weight:700; font-size:14px;}
+
+  /* ---------- HOW IT WORKS ---------- */
+  .how-strip{background:var(--cream-2); border-bottom:1px solid var(--line);}
+  .how-inner{max-width:1120px; margin:0 auto; padding:34px 24px; display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+  .how-step{display:flex; gap:12px; align-items:flex-start;}
+  .how-num{
+    font-family:'JetBrains Mono',monospace; font-weight:700; font-size:13px;
+    background:var(--crust); color:var(--gold);
+    width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .how-step b{display:block; font-size:14px; margin-bottom:2px;}
+  .how-step span{font-size:12.5px; color:var(--ink-soft);}
+
+  section{max-width:1120px; margin:0 auto; padding:64px 24px;}
+  .section-head{display:flex; align-items:end; justify-content:space-between; margin-bottom:32px; flex-wrap:wrap; gap:16px;}
+  .section-head .eyebrow{color:var(--tomato); margin-bottom:8px;}
+  .section-head .eyebrow::before{background:var(--tomato);}
+  .section-head h2{font-size:34px;}
+
+  .tabs{display:flex; gap:8px; overflow-x:auto; padding-bottom:6px; margin-bottom:36px;}
+  .tab{
+    flex-shrink:0;
+    background:var(--paper); border:1px solid var(--line); border-radius:24px;
+    padding:9px 18px; font-size:13.5px; font-weight:500; color:var(--ink-soft);
+  }
+  .tab.active{background:var(--crust); color:var(--cream); border-color:var(--crust);}
+
+  .menu-cat{display:none;}
+  .menu-cat.active{display:block;}
+  .menu-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px;}
+  .item-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:14px;
+    padding:18px 20px; display:flex; flex-direction:column; gap:6px;
+    position:relative;
+  }
+  .item-top{display:flex; justify-content:space-between; gap:10px;}
+  .item-name{font-family:'Fraunces',serif; font-size:18px; font-weight:600;}
+  .item-price{font-family:'JetBrains Mono',monospace; font-size:15px; color:var(--tomato-dark); font-weight:700; white-space:nowrap;}
+  .item-desc{font-size:13.5px; color:var(--ink-soft); flex-grow:1;}
+  .badge-pop{
+    display:inline-block; font-size:10px; text-transform:uppercase; letter-spacing:.05em;
+    background:rgba(217,164,65,0.18); color:#8a6416; padding:2px 8px; border-radius:10px; margin-bottom:2px; width:fit-content;
+  }
+  .item-bottom{display:flex; align-items:center; justify-content:space-between; margin-top:8px; gap:10px;}
+  .size-select{
+    font-family:'Work Sans',sans-serif; font-size:12.5px; border:1px solid var(--line);
+    border-radius:8px; padding:6px 8px; background:var(--cream); color:var(--ink); max-width:170px;
+  }
+  .add-btn{
+    background:var(--basil); color:var(--cream); border:none; border-radius:8px;
+    padding:8px 16px; font-size:12.5px; font-weight:600; margin-left:auto;
+  }
+  .add-btn:active{transform:scale(.97);}
+  .item-admin-tools{
+    display:none; position:absolute; top:10px; right:10px; gap:6px;
+  }
+  body.admin .item-admin-tools{display:flex;}
+  .mini-btn{
+    background:var(--crust); color:var(--cream); border:none; border-radius:6px;
+    font-size:11px; padding:4px 9px; font-weight:600;
+  }
+  .mini-btn.danger{background:var(--tomato-dark);}
+  .admin-add-card{
+    display:none;
+    border:2px dashed var(--basil); border-radius:14px; background:transparent;
+    color:var(--basil); font-size:14px; font-weight:600; padding:30px;
+    align-items:center; justify-content:center; min-height:120px;
+  }
+  body.admin .admin-add-card{display:flex;}
+
+  .about-wrap{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;}
+  .about-card{background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:26px;}
+  .info-row{display:flex; gap:12px; padding:12px 0; border-bottom:1px solid var(--line); font-size:14px;}
+  .info-row:last-child{border-bottom:none;}
+  .info-row .k{width:100px; color:var(--ink-soft); flex-shrink:0;}
+  .hours-table{width:100%; font-size:13.5px; border-collapse:collapse;}
+  .hours-table td{padding:5px 0; border-bottom:1px dashed var(--line);}
+  .hours-table td:last-child{text-align:right; font-family:'JetBrains Mono',monospace;}
+
+  footer{background:var(--crust); color:var(--cream-2); padding:44px 24px 30px; margin-top:40px;}
+  .footer-inner{max-width:1120px; margin:0 auto; display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px; font-size:13px;}
+  .footer-inner .fname{font-family:'Fraunces',serif; color:var(--cream); font-size:18px; margin-bottom:6px;}
+  .footer-note{opacity:.55; font-size:11.5px; margin-top:18px;}
+  .owner-link{opacity:.5; font-size:11.5px; text-decoration:underline; cursor:pointer; background:none; border:none; color:var(--cream-2); padding:0;}
+
+  /* ---------- CART DRAWER ---------- */
+  .overlay{
+    position:fixed; inset:0; background:rgba(36,23,19,0.5);
+    opacity:0; pointer-events:none; transition:opacity .25s; z-index:60;
+  }
+  .overlay.open{opacity:1; pointer-events:auto;}
+  .drawer{
+    position:fixed; top:0; right:0; height:100%; width:400px; max-width:92vw;
+    background:var(--paper); z-index:61; transform:translateX(100%);
+    transition:transform .3s ease; display:flex; flex-direction:column;
+    box-shadow:-10px 0 30px rgba(0,0,0,0.2);
+  }
+  .drawer.open{transform:translateX(0);}
+  .drawer-head{padding:20px 22px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center;}
+  .drawer-head h3{font-size:20px;}
+  .close-btn{background:none; border:none; font-size:20px; color:var(--ink-soft); line-height:1;}
+  .drawer-body{flex:1; overflow-y:auto; padding:16px 22px; font-family:'JetBrains Mono',monospace; font-size:13px;}
+  .cart-empty{color:var(--ink-soft); text-align:center; padding:60px 10px; font-family:'Work Sans',sans-serif;}
+  .cart-line{padding:12px 0; border-bottom:1px dashed var(--line);}
+  .cart-line .cl-top{display:flex; justify-content:space-between; font-weight:700; gap:10px;}
+  .cart-line .cl-sub{color:var(--ink-soft); font-size:11.5px; margin-top:2px;}
+  .cl-controls{display:flex; align-items:center; gap:10px; margin-top:8px;}
+  .qty-btn{width:22px;height:22px; border:1px solid var(--line); background:var(--cream); border-radius:5px; font-size:13px; display:flex; align-items:center; justify-content:center;}
+  .remove-btn{margin-left:auto; color:var(--tomato-dark); background:none; border:none; font-size:11px; text-decoration:underline;}
+  .drawer-foot{border-top:1px dashed var(--line); padding:18px 22px 22px; font-family:'JetBrains Mono',monospace; font-size:13.5px;}
+  .df-row{display:flex; justify-content:space-between; margin:5px 0;}
+  .df-row.total{font-weight:700; font-size:16px; margin-top:10px;}
+  .checkout-btn{
+    width:100%; background:var(--tomato); color:var(--cream); border:none; border-radius:10px;
+    padding:14px; font-family:'Work Sans',sans-serif; font-size:14.5px; font-weight:600; margin-top:14px;
+  }
+  .checkout-btn:disabled{background:var(--line); color:var(--ink-soft);}
+
+  /* ---------- MODALS ---------- */
+  .modal-wrap{
+    position:fixed; inset:0; z-index:70; display:none;
+    align-items:center; justify-content:center; padding:20px;
+    background:rgba(36,23,19,0.55);
+  }
+  .modal-wrap.open{display:flex;}
+  .modal{
+    background:var(--paper); border-radius:16px; width:480px; max-width:100%;
+    max-height:88vh; overflow-y:auto; padding:28px;
+  }
+  .modal h3{font-size:22px; margin-bottom:4px;}
+  .modal .msub{font-size:13px; color:var(--ink-soft); margin-bottom:20px;}
+  .field{margin-bottom:14px;}
+  .field label{display:block; font-size:12.5px; font-weight:500; color:var(--ink-soft); margin-bottom:5px;}
+  .field input, .field textarea, .field select{
+    width:100%; border:1px solid var(--line); border-radius:9px; padding:10px 12px;
+    font-family:'Work Sans',sans-serif; font-size:14px; background:var(--cream); color:var(--ink);
+  }
+  .field textarea{resize:vertical; min-height:56px;}
+  .field .hint{font-size:11.5px; color:var(--ink-soft); margin-top:4px;}
+  .choice-row{display:flex; gap:10px; margin-bottom:16px;}
+  .choice-btn{flex:1; padding:11px 8px; border-radius:9px; border:1px solid var(--line); background:var(--cream); font-size:13px; font-weight:500; text-align:center;}
+  .choice-btn small{display:block; font-weight:400; font-size:11px; color:var(--ink-soft); margin-top:2px;}
+  .choice-btn.active{background:var(--basil); color:var(--cream); border-color:var(--basil);}
+  .choice-btn.active small{color:var(--cream-2);}
+  .group-label{font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft); font-weight:600; margin:18px 0 8px;}
+  .modal-submit{
+    width:100%; background:var(--tomato); color:var(--cream); border:none; border-radius:10px;
+    padding:14px; font-size:14.5px; font-weight:600; margin-top:6px;
+  }
+  .modal-alt{
+    width:100%; background:transparent; color:var(--crust); border:1px solid var(--line); border-radius:10px;
+    padding:12px; font-size:13.5px; font-weight:600; margin-top:10px; text-decoration:none; display:block; text-align:center;
+  }
+  .err{color:var(--tomato-dark); font-size:12.5px; margin:4px 0 12px; display:none;}
+  .sizes-editor .size-row{display:flex; gap:8px; margin-bottom:8px;}
+  .sizes-editor input{flex:1;}
+  .sizes-editor .size-row input:last-of-type{max-width:100px;}
+  .link-btn{background:none; border:none; color:var(--basil); font-size:12.5px; font-weight:600; text-decoration:underline; padding:0;}
+  .check-row{display:flex; align-items:center; gap:8px; font-size:13.5px; margin-bottom:14px;}
+  .check-row input{width:16px; height:16px;}
+
+  .confirm-icon{
+    width:52px;height:52px;border-radius:50%; background:var(--basil); color:var(--cream);
+    display:flex; align-items:center; justify-content:center; font-size:26px; margin:0 auto 16px;
+  }
+  .confirm-ticket{background:var(--cream); border:1px dashed var(--line); border-radius:10px; padding:16px; font-family:'JetBrains Mono',monospace; font-size:12.5px; margin-top:16px; white-space:pre-wrap; line-height:1.55;}
+  .confirm-note{font-size:12.5px; color:var(--ink-soft); margin-top:16px; text-align:center; line-height:1.6;}
+  .sending{opacity:.6; pointer-events:none;}
+
+  @media (max-width: 860px){
+    nav.main-nav{display:none;}
+    .hero-inner{grid-template-columns:1fr;}
+    .hero h1{font-size:38px;}
+    .ticket{transform:none; margin-top:20px;}
+    .menu-grid{grid-template-columns:1fr;}
+    .about-wrap{grid-template-columns:1fr;}
+    .hero-stats{gap:18px;}
+    .how-inner{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-mark">LP</div>
+      <div class="brand-text">
+        <div class="name">Lyndhurst Pizza</div>
+        <div class="sub">446 Ridge Rd · Lyndhurst NJ</div>
+      </div>
+    </div>
+    <nav class="main-nav">
+      <a href="#menu">Menu</a>
+      <a href="#how">How ordering works</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <span class="status-pill">Open 7 days · late night</span>
+      <button class="cart-btn" id="openCartBtn">
+        Your order <span class="count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="admin-bar" id="adminBar">
+  <div class="admin-bar-inner">
+    <b>Owner mode</b>
+    <span class="draft-flag" id="draftFlag" style="display:none;">Unpublished changes on this browser</span>
+    <button class="abtn" id="addCategoryBtn">+ Add category</button>
+    <button class="abtn" id="publishBtn">Download menu.json to publish</button>
+    <button class="abtn ghost" id="discardBtn">Discard changes</button>
+    <button class="abtn ghost" id="logoutBtn" style="margin-left:auto;">Exit owner mode</button>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">Skip the phone line</div>
+      <h1>Order online.<br><em>Pay when you get it.</em></h1>
+      <p class="lede">Build your order right here — no more spelling your address over a busy phone line. Choose pickup or delivery, then pay cash or give your card over the phone when we confirm.</p>
+      <div class="hero-ctas">
+        <a href="#menu" class="btn btn-primary">Start your order</a>
+        <a href="tel:+12019395666" class="btn btn-ghost">Call (201) 939-5666</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="num">4.5★</div><div class="lbl">3k+ ratings</div></div>
+        <div><div class="num">7 days</div><div class="lbl">a week</div></div>
+        <div><div class="num">Late night</div><div class="lbl">until close</div></div>
+      </div>
+    </div>
+    <div class="ticket">
+      <h3>Lyndhurst Pizzeria</h3>
+      <div class="tsub">— incoming order —</div>
+      <hr>
+      <div class="row"><span>1x Cheese pizza (16")</span><span>16.99</span></div>
+      <div class="row"><span>1x Chicken parmigiana sub</span><span>12.99</span></div>
+      <div class="row"><span>1x 2 liter soda</span><span>4.99</span></div>
+      <hr>
+      <div class="row"><span>Type</span><span>DELIVERY</span></div>
+      <div class="row"><span>Payment</span><span>CASH</span></div>
+      <hr>
+      <div class="row tot"><span>Total</span><span>$37.28</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="how-strip" id="how">
+  <div class="how-inner">
+    <div class="how-step"><div class="how-num">1</div><div><b>Build your order</b><span>Add items from the menu below.</span></div></div>
+    <div class="how-step"><div class="how-num">2</div><div><b>Pickup or delivery</b><span>Enter your name, phone, and address.</span></div></div>
+    <div class="how-step"><div class="how-num">3</div><div><b>Confirm by text</b><span>One tap from your phone verifies it's a real order.</span></div></div>
+    <div class="how-step"><div class="how-num">4</div><div><b>Pay on your terms</b><span>Cash at the door / counter, or card over the phone.</span></div></div>
+  </div>
+</div>
+
+<section id="menu">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Digital menu</div>
+      <h2>Build your order</h2>
+    </div>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+  <div id="menuCats"></div>
+</section>
+
+<section id="about">
+  <div class="about-wrap">
+    <div>
+      <div class="eyebrow">About us</div>
+      <h2>Your neighborhood spot on Ridge Rd</h2>
+      <p style="color:var(--ink-soft); font-size:15px; margin-top:14px;">
+        Family-run pizzeria and restaurant in Lyndhurst, New Jersey — rated #1 in town by our regulars.
+        Fresh dough daily, a full Italian kitchen from specialty pies to chicken &amp; veal dinners,
+        open 7 days a week with late-night hours. Order here and skip the busy phone line —
+        your order arrives in writing so nothing gets lost.
+      </p>
+    </div>
+    <div class="about-card" id="contact">
+      <div class="info-row"><div class="k">Address</div><div>446 Ridge Rd, Lyndhurst, NJ 07071</div></div>
+      <div class="info-row"><div class="k">Phone</div><div><a href="tel:+12019395666">(201) 939-5666</a> · <a href="tel:+12019641210">(201) 964-1210</a></div></div>
+      <div class="info-row"><div class="k">Website</div><div><a href="https://www.lyndhurstpizza.com">lyndhurstpizza.com</a></div></div>
+      <div class="info-row"><div class="k">Hours</div><div>Open 7 days a week, late night — call to confirm tonight's closing time.</div></div>
+      <div class="info-row"><div class="k">Note</div><div>Sales tax not included in menu prices. We deliver to tons of nearby locations.</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="fname">Lyndhurst Pizza</div>
+      <div>446 Ridge Rd, Lyndhurst, NJ 07071</div>
+      <div>(201) 939-5666</div>
+    </div>
+    <div>
+      <div style="margin-bottom:6px; color:var(--cream);">Links</div>
+      <div><a href="#menu">Menu</a></div>
+      <div><a href="#how">How ordering works</a></div>
+      <div><a href="#contact">Contact</a></div>
+    </div>
+  </div>
+  <div class="footer-note" style="max-width:1120px; margin:0 auto; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap;">
+    <span>Orders aren't started until confirmed — by your confirmation text or by answering our call. Unconfirmed orders are canceled automatically. No payment online: pay cash, or by card over the phone. Prices and menu subject to change; your total is confirmed with your order.</span>
+    <button class="owner-link" id="ownerLoginLink">Owner login</button>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="drawer" id="cartDrawer">
+  <div class="drawer-head">
+    <h3>Your order</h3>
+    <button class="close-btn" id="closeDrawerBtn">&times;</button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-foot" id="drawerFoot" style="display:none;">
+    <div class="df-row"><span>Subtotal</span><span id="sumSubtotal">$0.00</span></div>
+    <div class="df-row"><span>NJ sales tax (6.625%)</span><span id="sumTax">$0.00</span></div>
+    <div class="df-row total"><span>Total</span><span id="sumTotal">$0.00</span></div>
+    <button class="checkout-btn" id="checkoutBtn">Continue to checkout</button>
+  </div>
+</div>
+
+<div class="modal-wrap" id="modalWrap">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<script>
+/* =========================================================
+   SHOP CONFIGURATION — edit this block only
+   =========================================================
+   ORDERS:
+   1. EMAIL (recommended): create a free form at https://formspree.io
+      with the shop's email, paste the endpoint below.
+   2. TEXT MESSAGE (zero setup): confirmation screen gives a one-tap
+      "Text this order" button to SHOP_SMS_NUMBER.
+
+   MENU EDITING (owner):
+   - Click "Owner login" in the footer, enter ADMIN_PASSWORD.
+   - Add / edit / delete items and categories. Changes preview
+     instantly on this browser.
+   - Click "Download menu.json to publish" and upload that file
+     next to index.html on your hosting. Every visitor then sees
+     the new menu (the site loads menu.json automatically).
+
+   NOTE ON THE PASSWORD: it lives in this file, so it keeps casual
+   visitors out but is not real security — a determined person can
+   read it in the page source. It only gates the editing interface;
+   the worst they could do is preview edits on their own browser.
+   Real accounts would need a backend.
+*/
+const ORDER_ENDPOINT = "";                    // paste Formspree URL here when ready
+const SHOP_SMS_NUMBER = "+12019395666";
+const SHOP_DISPLAY_PHONE = "(201) 939-5666";
+const TAX_RATE = 0.06625;
+/* ANTI-PRANK / VERIFICATION:
+   - Orders are never "final" from the website alone. The customer must
+     CONFIRM BY TEXT from their own phone (their real number shows on
+     caller ID — can't be faked) or answer the shop's confirmation call.
+   - KITCHEN RULE: never start an order until you've confirmed it by
+     text reply or phone call to the customer's number.
+   - COOLDOWN below blocks rapid repeat orders from the same browser.   */
+const ORDER_COOLDOWN_MINUTES = 10;            // min gap between orders per browser
+const COOLDOWN_KEY = "lp_last_order_ts";
+const ADMIN_PASSWORD = "changeme-lp2026";     // CHANGE THIS before going live
+const MENU_JSON_URL = "menu.json";            // published menu file (same folder)
+/* ========================================================= */
+
+const DEFAULT_MENU = {
+  pizza: {
+    label: "Pizza",
+    items: [
+      {id:"pz_cheese", name:"Cheese pizza", desc:"Classic cheese pie.", sizes:{'12"':13.99, '16"':16.99, '18"':19.99}, pop:true},
+      {id:"pz_sicilian", name:"Sicilian pizza", desc:'Thick square pie, 16" x 16".', price:20.99, pop:true},
+      {id:"tp_extra_reg", name:"Extra regular topping", desc:"Extra cheese, onion, mushrooms, ham, green peppers, meatball, olives, spinach, garlic, broccoli, eggplant, pepperoni, hot pepper, sausage. Write your topping in the order notes.", sizes:{'12"':3.00, '16"':3.00, '18"':4.00}},
+      {id:"tp_half_reg", name:"Half regular topping", desc:"Any regular topping on half the pie. Write your topping in the order notes.", sizes:{'12"':2.50, '16"':2.50, '18"':3.00}},
+      {id:"tp_extra_gourmet", name:"Extra gourmet topping", desc:"Grilled chicken, chicken cutlet, roasted pepper, artichokes, sun dried tomato, anchovies, bacon, pineapple. Write your topping in the order notes.", sizes:{'12"':4.50, '16"':4.50, '18"':5.50}},
+      {id:"tp_half_gourmet", name:"Half gourmet topping", desc:"Any gourmet topping on half the pie. Write your topping in the order notes.", sizes:{'12"':4.00, '16"':4.00, '18"':4.50}},
+    ]
+  },
+  specialty: {
+    label: "Specialty pizzas",
+    items: [
+      {id:"sp_supreme", name:"Supreme pizza", desc:"Pepperoni, black olives, mushrooms, green peppers.", sizes:{'12"':19.99, '16"':23.99, '18"':27.99}, pop:true},
+      {id:"sp_special", name:"Special pizza", desc:"Pepperoni, sausage, onion, mushrooms, tomatoes & tomato sauce.", sizes:{'12"':19.99, '16"':23.99, '18"':27.99}},
+      {id:"sp_veggie", name:"Veggie lovers pizza", desc:"Tomato, onion, mushrooms, black olives, green pepper.", sizes:{'12"':19.99, '16"':23.99, '18"':27.99}},
+      {id:"sp_meat", name:"Meat lovers pizza", desc:"Pepperoni, bacon, meatball, sausage.", sizes:{'12"':19.99, '16"':23.99, '18"':27.99}, pop:true},
+      {id:"sp_steak", name:"Steak & cheese pizza", desc:"Philly steak, onion, peppers, cheese & mushrooms.", sizes:{'12"':19.99, '16"':23.99, '18"':27.99}},
+      {id:"sp_greek", name:"Greek style pizza", desc:"Tomato, red onion, black olives, feta & mozzarella cheese.", sizes:{'12"':19.99, '16"':23.99, '18"':27.99}},
+      {id:"sp_white", name:"White pizza", desc:"Ricotta & mozzarella cheese.", sizes:{'12"':19.99, '16"':23.99, '18"':27.99}},
+      {id:"sp_spinach_white", name:"Spinach or broccoli white pizza", desc:"Ricotta & mozzarella with spinach or broccoli — say which in order notes.", sizes:{'12"':19.99, '16"':23.99, '18"':27.99}},
+      {id:"sp_cheese_lovers", name:"Cheese lovers pizza", desc:"Mozzarella, ricotta, provolone & American cheese.", sizes:{'12"':19.99, '16"':23.99, '18"':27.99}},
+      {id:"sp_hawaiian", name:"Hawaiian pizza", desc:"Ham, pineapple, mozzarella cheese.", sizes:{'12"':19.99, '16"':23.99, '18"':27.99}},
+      {id:"sp_clams", name:"Baby clams pizza", desc:"Bacon, clams, garlic & mozzarella cheese.", sizes:{'12"':19.99, '16"':23.99, '18"':27.99}},
+      {id:"sp_margarita", name:"Margarita pizza", desc:"Fresh mozzarella, tomato sauce & basil.", sizes:{'12"':19.99, '16"':23.99, '18"':27.99}},
+      {id:"sp_chicken_parm", name:"Chicken parm pizza", desc:"Chicken cutlets over tomato sauce & mozzarella cheese.", sizes:{'12"':19.99, '16"':23.99, '18"':27.99}},
+      {id:"sp_bruschetta", name:"Bruschetta pizza", desc:"Chopped tomatoes with onion, garlic, fresh basil.", sizes:{'12"':19.99, '16"':23.99, '18"':27.99}},
+      {id:"sp_buffalo", name:"Buffalo chicken pizza", desc:"Fried chicken, hot sauce & blue cheese.", sizes:{'12"':19.99, '16"':23.99, '18"':27.99}, pop:true},
+      {id:"sp_grilled_chicken", name:"Grilled chicken pizza", desc:"Grilled chicken, tomato sauce & mozzarella.", sizes:{'12"':19.99, '16"':23.99, '18"':27.99}},
+      {id:"sp_cowboy", name:"Cowboy pizza", desc:"Fried chicken, bacon, ranch & mozzarella cheese.", sizes:{'12"':19.99, '16"':23.99, '18"':27.99}},
+      {id:"sp_grandma", name:"Grandma pizza", desc:"Marinara sauce, fresh mozzarella & fresh basil.", sizes:{'12"':19.99, '16"':23.99, '18"':27.99}},
+      {id:"sp_vodka", name:"Drunken penne vodka pizza", desc:"Penne alla vodka on a pie.", sizes:{'12"':19.99, '16"':23.99, '18"':27.99}},
+    ]
+  },
+  calzones: {
+    label: "Calzones",
+    items: [
+      {id:"cz_cheese", name:"Cheese calzone", desc:"Mozzarella & ricotta cheese.", price:12.99, pop:true},
+      {id:"cz_ham", name:"Ham calzone", desc:"Ham, mozzarella & ricotta cheese.", price:13.99},
+      {id:"cz_chicken", name:"Chicken calzone", desc:"Chicken, mozzarella & ricotta cheese.", price:13.99},
+    ]
+  },
+  pastas: {
+    label: "Pastas",
+    items: [
+      {id:"pa_tomato", name:"Pasta with tomato sauce", desc:"Choose spaghetti, penne, linguini, or fettuccini — write your choice in the order notes.", price:12.99},
+      {id:"pa_butter_garlic", name:"Pasta with butter and garlic", desc:"Choose spaghetti, penne, linguini, or fettuccini.", price:13.99},
+      {id:"pa_meatball", name:"Pasta with meatball", desc:"Choose spaghetti, penne, linguini, or fettuccini.", price:16.99},
+      {id:"pa_meatball_parm", name:"Pasta with meatball parm", desc:"Choose spaghetti, penne, linguini, or fettuccini.", price:18.99},
+      {id:"pa_sausage", name:"Pasta with sausage", desc:"Choose spaghetti, penne, linguini, or fettuccini.", price:16.99},
+      {id:"pa_sausage_parm", name:"Pasta with sausage parm", desc:"Choose spaghetti, penne, linguini, or fettuccini.", price:18.99},
+      {id:"pa_eggplant", name:"Pasta with eggplant", desc:"Choose spaghetti, penne, linguini, or fettuccini.", price:16.99},
+      {id:"pa_broccoli", name:"Pasta with broccoli", desc:"With butter in a light garlic sauce.", price:16.99},
+      {id:"pa_bolognese", name:"Pasta with bolognese sauce", desc:"Choose spaghetti, penne, linguini, or fettuccini.", price:18.99},
+      {id:"pa_alfredo", name:"Fettuccine Alfredo", desc:"With aged romano in a rich cream sauce.", price:17.99, pop:true},
+      {id:"pa_alfredo_chicken", name:"Fettuccine Alfredo with chicken", desc:"With grilled or fried chicken.", price:20.99},
+      {id:"pa_vodka", name:"Penne alla vodka", desc:"Classic pink vodka sauce.", price:16.99, pop:true},
+      {id:"pa_vodka_chicken", name:"Penne alla vodka with chicken", desc:"With grilled or fried chicken.", price:20.99},
+      {id:"pa_rollatini", name:"Eggplant rollatini", desc:"Rolled eggplant with ricotta, baked in sauce.", price:16.99},
+      {id:"pa_eggplant_parm", name:"Eggplant parm", desc:"Breaded eggplant baked with sauce & mozzarella.", price:17.99},
+      {id:"pa_meat_ravioli", name:"Meat ravioli parm", desc:"Baked with sauce & mozzarella.", price:17.99},
+      {id:"pa_cheese_ravioli", name:"Cheese ravioli parm", desc:"Baked with sauce & mozzarella.", price:17.99},
+      {id:"pa_manicotti", name:"Manicotti", desc:"Cheese-filled pasta baked in sauce.", price:17.99},
+      {id:"pa_shells", name:"Stuffed shells", desc:"Ricotta-stuffed shells baked in sauce.", price:17.99},
+      {id:"pa_ziti", name:"Baked ziti", desc:"Ziti, ricotta & marinara baked with mozzarella.", price:17.99},
+      {id:"pa_lasagna", name:"Lasagna", desc:"Layered pasta baked with meat sauce & cheese.", price:17.99},
+      {id:"pa_add_chicken", name:"Add grilled or fried chicken to any pasta", desc:"Add-on — say which pasta in the order notes.", price:4.00},
+      {id:"pa_add_shrimp", name:"Add grilled or fried shrimp to any pasta", desc:"Add-on — say which pasta in the order notes.", price:6.50},
+      {id:"pa_add_salad", name:"Add small tossed salad", desc:"Side salad add-on.", price:3.99},
+    ]
+  },
+  chicken_veal: {
+    label: "Chicken & veal",
+    items: [
+      {id:"cv_parm", name:"Parmigiana", desc:"Tomato sauce & cheese. Served with pasta: spaghetti, penne, linguini, or fettuccini.", sizes:{"Chicken":17.99, "Veal":20.99}, pop:true},
+      {id:"cv_francese", name:"Francese", desc:"Lemon butter sauce.", sizes:{"Chicken":18.99, "Veal":21.99}},
+      {id:"cv_marsala", name:"Marsala", desc:"Sautéed with mushrooms in a Marsala wine sauce.", sizes:{"Chicken":18.99, "Veal":21.99}},
+      {id:"cv_piccata", name:"Piccata", desc:"With capers & white wine sauce.", sizes:{"Chicken":18.99, "Veal":21.99}},
+      {id:"cv_murphy", name:"Murphy", desc:"Onion, pepper, mushrooms & potatoes with a light garlic and white wine sauce.", sizes:{"Chicken":18.99, "Veal":21.99}},
+      {id:"cv_sorrentino", name:"Sorrentino", desc:"Topped with eggplant in a light marinara sauce.", sizes:{"Chicken":18.99, "Veal":21.99}},
+      {id:"cv_florentine", name:"Florentine", desc:"Sautéed with spinach, topped with mozzarella.", sizes:{"Chicken":18.99, "Veal":21.99}},
+      {id:"cv_bruschetta", name:"Bruschetta", desc:"Lightly fried, topped with tomato & julienne onion in a virgin olive oil dressing.", sizes:{"Chicken":18.99, "Veal":21.99}},
+      {id:"cv_dicasa", name:"Di casa sautéed", desc:"With mushrooms, artichokes & sun dried tomatoes in a white wine sauce.", sizes:{"Chicken":18.99, "Veal":21.99}},
+    ]
+  },
+  subs: {
+    label: "Hot & cold subs",
+    items: [
+      {id:"sb_grilled_chicken", name:"Grilled chicken sub", desc:"Roasted peppers, sun dried tomatoes, fresh mozzarella, lettuce & balsamic.", price:12.99},
+      {id:"sb_cheesesteak", name:"Cheese steak sub", desc:"Peppers & onion.", price:12.99, pop:true},
+      {id:"sb_chicken_cheesesteak", name:"Chicken cheese steak sub", desc:"Peppers & onion.", price:12.99},
+      {id:"sb_eggplant_parm", name:"Eggplant parmigiana sub", desc:"Breaded eggplant, sauce & mozzarella.", price:12.99},
+      {id:"sb_chicken_parm", name:"Chicken parmigiana sub", desc:"Chicken cutlet, sauce & melted mozzarella.", price:12.99, pop:true},
+      {id:"sb_chicken_francese", name:"Chicken francese sub", desc:"In lemon butter sauce.", price:13.99},
+      {id:"sb_chicken_marsala", name:"Chicken marsala sub", desc:"With mushrooms in Marsala wine sauce.", price:13.99},
+      {id:"sb_chicken_cutlet", name:"Chicken cutlet sub", desc:"Lettuce, tomato & mayo.", price:12.99},
+      {id:"sb_buffalo_chicken", name:"Buffalo chicken sub", desc:"Lettuce, tomato & blue cheese.", price:12.99},
+      {id:"sb_veal_parm", name:"Veal parmigiana sub", desc:"Veal cutlet, sauce & melted mozzarella.", price:14.99},
+      {id:"sb_veal_cutlet", name:"Veal cutlet sub", desc:"Lettuce, tomato & mayo.", price:14.99},
+      {id:"sb_meatball", name:"Meatball sub", desc:"House meatballs in sauce.", price:12.99},
+      {id:"sb_meatball_parm", name:"Meatball parmigiana sub", desc:"Meatballs in sauce, baked with mozzarella.", price:12.99},
+      {id:"sb_sausage", name:"Sausage sub", desc:"Italian sausage in sauce.", price:12.99},
+      {id:"sb_sausage_parm", name:"Sausage parmigiana sub", desc:"Sausage in sauce, baked with mozzarella.", price:12.99},
+      {id:"sb_tuna", name:"Tuna and cheese sub", desc:"Lettuce, tomato & mayo.", price:12.99},
+      {id:"sb_ham_salami", name:"Ham, salami & provolone sub", desc:"Lettuce, tomato & mayo.", price:12.99},
+      {id:"sb_turkey", name:"Turkey & cheese sub", desc:"Lettuce, tomato & mayo.", price:12.99},
+      {id:"sb_hot_dog", name:"Italian hot dog sub", desc:"With peppers, onions & potatoes.", price:12.99},
+      {id:"sb_fat_moose", name:"Fat Moose sub", desc:"Chicken cutlet, fresh mozzarella, lettuce, tomato, mayo, onion rings & mozzarella sticks.", price:15.99},
+      {id:"sb_fat_mike", name:"Fat Mike sub", desc:"Chicken cutlet, pepperoni, mozzarella cheese, onion rings, french fries & mozzarella sticks.", price:15.99},
+      {id:"sb_fat_billy", name:"Fat Billy sub", desc:"Beef steak, chicken steak, french fries, peppers, onion, American & mozzarella cheese.", price:15.99},
+      {id:"sb_veggie", name:"Grilled veggie sub", desc:"Eggplant, zucchini, mushrooms, roasted peppers, fresh mozzarella with balsamic dressing.", price:12.99},
+    ]
+  },
+  wraps: {
+    label: "Wraps",
+    items: [
+      {id:"wr_cheesesteak", name:"Cheese steak wrap", desc:"Peppers & onion. Served with french fries — plain or whole wheat wrap.", price:12.99},
+      {id:"wr_chicken_cheesesteak", name:"Chicken cheese steak wrap", desc:"Peppers & onion. Served with french fries.", price:12.99},
+      {id:"wr_chicken_parm", name:"Chicken parmesan wrap", desc:"Served with french fries.", price:12.99},
+      {id:"wr_ham", name:"Ham & American wrap", desc:"Lettuce, tomato, onion & mayo. Served with french fries.", price:12.99},
+      {id:"wr_tuna", name:"Tuna fish wrap", desc:"Lettuce, tomato, onion, oil & vinegar. Served with french fries.", price:12.99},
+      {id:"wr_buffalo", name:"Buffalo chicken wrap", desc:"Lettuce, tomato & blue cheese. Served with french fries.", price:12.99},
+      {id:"wr_grilled_mozz", name:"Grilled chicken fresh mozzarella wrap", desc:"Roasted peppers, sun dried tomatoes, lettuce & balsamic. Served with french fries.", price:12.99},
+      {id:"wr_tender", name:"Chicken tender wrap", desc:"Lettuce, tomato & honey mustard. Served with french fries.", price:12.99},
+      {id:"wr_caesar", name:"Grilled chicken Caesar wrap", desc:"Romaine lettuce & Caesar dressing. Served with french fries.", price:12.99},
+    ]
+  },
+  grill: {
+    label: "From the grill",
+    items: [
+      {id:"gr_hamburger", name:"Hamburger", desc:"Served with lettuce, tomato, mayo & french fries.", price:10.99},
+      {id:"gr_cheeseburger", name:"Cheeseburger", desc:"Served with lettuce, tomato, mayo & french fries.", price:13.99},
+      {id:"gr_double", name:"Double cheese burger", desc:"Served with lettuce, tomato, mayo & french fries.", price:14.99},
+      {id:"gr_fat_kenny", name:"Fat Kenny", desc:"Burger patty & grilled chicken. Served with fries.", price:14.99},
+      {id:"gr_gyro", name:"Gyro", desc:"Served in pita bread with lettuce, tomato, onion & tzatziki sauce.", price:12.99},
+    ]
+  },
+  soups_more: {
+    label: "Soups & mussels",
+    items: [
+      {id:"so_fagioli", name:"Pasta fagioli", desc:"Hearty Italian bean & pasta soup.", price:6.99},
+      {id:"so_chicken", name:"Chicken soup", desc:"Homestyle chicken soup.", price:6.99},
+      {id:"so_minestrone", name:"Minestrone", desc:"Classic vegetable soup.", price:6.99},
+      {id:"mu_mussels", name:"Mussels", desc:"Red or white wine sauce — say which in order notes.", sizes:{"5 pieces":7.99, "10 pieces":14.99, "15 pieces":21.99}},
+    ]
+  },
+  desserts: {
+    label: "Desserts",
+    items: [
+      {id:"de_cheesecake", name:"Cheesecake", desc:"", price:6.99},
+      {id:"de_carrot", name:"Carrot cake", desc:"", price:6.99},
+      {id:"de_tiramisu", name:"Tiramisu", desc:"", price:6.99, pop:true},
+      {id:"de_tres_leche", name:"Tres leche", desc:"", price:6.99},
+      {id:"de_chocolate", name:"Chocolate cake", desc:"", price:6.99},
+      {id:"de_oreo", name:"Oreo cake", desc:"", price:6.99},
+      {id:"de_cannoli", name:"Cannoli", desc:"", price:6.99},
+      {id:"de_rice_pudding", name:"Rice pudding", desc:"", price:6.99},
+    ]
+  },
+  drinks: {
+    label: "Drinks",
+    items: [
+      {id:"dr_water", name:"Bottled water", desc:"", price:2.00},
+      {id:"dr_2l", name:"2 liter soda", desc:"Pepsi, Diet Pepsi, Mountain Dew, or Orange — say which in order notes.", price:4.99},
+      {id:"dr_sm_bottle", name:"Small bottled soda", desc:"Pepsi, Diet Pepsi, Mountain Dew, Orange, Ginger Ale, or Iced Tea.", price:2.99},
+      {id:"dr_can", name:"Canned soda", desc:"Coke, Diet Coke, Pepsi, or Sprite.", price:2.00},
+    ]
+  }
+};
+
+let MENU = JSON.parse(JSON.stringify(DEFAULT_MENU));
+let cart = [];
+let isAdmin = false;
+let activeTab = null;
+const DRAFT_KEY = "lp_menu_draft";
+const ADMIN_KEY = "lp_admin_session";
+
+function money(n){ return "$" + n.toFixed(2); }
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function slug(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,"_").replace(/^_|_$/g,"") || ("x" + Date.now()); }
+
+/* ---------- MENU LOADING (draft > published menu.json > defaults) ---------- */
+async function loadMenu(){
+  let draft = null;
+  try{ draft = JSON.parse(localStorage.getItem(DRAFT_KEY)); }catch(e){}
+  if(draft && typeof draft === "object"){
+    MENU = draft;
+    updateDraftFlag(true);
+    return;
+  }
+  try{
+    const res = await fetch(MENU_JSON_URL, {cache:"no-store"});
+    if(res.ok){
+      const data = await res.json();
+      if(data && typeof data === "object" && Object.keys(data).length) MENU = data;
+    }
+  }catch(e){ /* file:// or no menu.json yet — defaults are fine */ }
+}
+
+function saveDraft(){
+  localStorage.setItem(DRAFT_KEY, JSON.stringify(MENU));
+  updateDraftFlag(true);
+}
+function updateDraftFlag(on){
+  document.getElementById("draftFlag").style.display = on ? "inline-block" : "none";
+}
+
+/* ---------- MENU RENDER ---------- */
+function buildTabsAndMenu(){
+  const tabsEl = document.getElementById("tabs");
+  const catsEl = document.getElementById("menuCats");
+  tabsEl.innerHTML = "";
+  catsEl.innerHTML = "";
+  const keys = Object.keys(MENU);
+  if(keys.length === 0){
+    catsEl.innerHTML = '<p style="color:var(--ink-soft);">Menu coming soon.</p>';
+    return;
+  }
+  if(!activeTab || !MENU[activeTab]) activeTab = keys[0];
+
+  keys.forEach(key => {
+    const tab = document.createElement("button");
+    tab.className = "tab" + (key === activeTab ? " active" : "");
+    tab.textContent = MENU[key].label;
+    tab.dataset.cat = key;
+    tab.addEventListener("click", () => { activeTab = key; switchTab(key); });
+    tabsEl.appendChild(tab);
+
+    const catDiv = document.createElement("div");
+    catDiv.className = "menu-cat" + (key === activeTab ? " active" : "");
+    catDiv.dataset.cat = key;
+    const grid = document.createElement("div");
+    grid.className = "menu-grid";
+
+    MENU[key].items.forEach((item, idx) => {
+      const card = document.createElement("div");
+      card.className = "item-card";
+      let sizeControl = "";
+      if(item.sizes && Object.keys(item.sizes).length){
+        const opts = Object.keys(item.sizes).map(s => `<option value="${esc(s)}">${esc(s)} — ${money(item.sizes[s])}</option>`).join("");
+        sizeControl = `<select class="size-select">${opts}</select>`;
+      }
+      card.innerHTML = `
+        <div class="item-admin-tools">
+          <button class="mini-btn edit-item">Edit</button>
+          <button class="mini-btn danger del-item">Delete</button>
+        </div>
+        ${item.pop ? '<span class="badge-pop">Popular</span>' : ''}
+        <div class="item-top">
+          <div class="item-name">${esc(item.name)}</div>
+          ${item.sizes ? "" : `<div class="item-price">${money(item.price)}</div>`}
+        </div>
+        <div class="item-desc">${esc(item.desc || "")}</div>
+        <div class="item-bottom">
+          ${sizeControl}
+          <button class="add-btn">Add to order</button>
+        </div>
+      `;
+      grid.appendChild(card);
+
+      card.querySelector(".add-btn").addEventListener("click", () => {
+        if(item.sizes && Object.keys(item.sizes).length){
+          const size = card.querySelector(".size-select").value;
+          addToCart(item.id + "|" + size, item.name + " (" + size + ")", item.sizes[size]);
+        } else {
+          addToCart(item.id, item.name, item.price);
+        }
+      });
+      card.querySelector(".edit-item").addEventListener("click", () => openItemEditor(key, idx));
+      card.querySelector(".del-item").addEventListener("click", () => {
+        if(confirm('Delete "' + item.name + '" from the menu?')){
+          MENU[key].items.splice(idx,1);
+          saveDraft(); buildTabsAndMenu();
+        }
+      });
+    });
+
+    const addCard = document.createElement("button");
+    addCard.className = "admin-add-card";
+    addCard.textContent = "+ Add item to " + MENU[key].label;
+    addCard.addEventListener("click", () => openItemEditor(key, null));
+    grid.appendChild(addCard);
+
+    if(isAdmin){
+      const catTools = document.createElement("div");
+      catTools.style.cssText = "margin-top:18px; display:flex; gap:10px;";
+      catTools.innerHTML = `
+        <button class="mini-btn rename-cat">Rename category</button>
+        <button class="mini-btn danger del-cat">Delete category</button>`;
+      catTools.querySelector(".rename-cat").addEventListener("click", () => {
+        const nn = prompt("Category name:", MENU[key].label);
+        if(nn && nn.trim()){ MENU[key].label = nn.trim(); saveDraft(); buildTabsAndMenu(); }
+      });
+      catTools.querySelector(".del-cat").addEventListener("click", () => {
+        if(confirm('Delete the whole "' + MENU[key].label + '" category and its ' + MENU[key].items.length + ' items?')){
+          delete MENU[key];
+          activeTab = null;
+          saveDraft(); buildTabsAndMenu();
+        }
+      });
+      catDiv.appendChild(grid);
+      catDiv.appendChild(catTools);
+    } else {
+      catDiv.appendChild(grid);
+    }
+    catsEl.appendChild(catDiv);
+  });
+}
+
+function switchTab(key){
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.cat === key));
+  document.querySelectorAll(".menu-cat").forEach(c => c.classList.toggle("active", c.dataset.cat === key));
+}
+
+/* ---------- CART ---------- */
+function addToCart(key, label, price){
+  const existing = cart.find(l => l.key === key);
+  if(existing){ existing.qty += 1; }
+  else{ cart.push({key, label, price, qty:1}); }
+  renderCart();
+  openDrawer();
+}
+function changeQty(key, delta){
+  const line = cart.find(l => l.key === key);
+  if(!line) return;
+  line.qty += delta;
+  if(line.qty <= 0){ cart = cart.filter(l => l.key !== key); }
+  renderCart();
+}
+function removeLine(key){
+  cart = cart.filter(l => l.key !== key);
+  renderCart();
+}
+function cartTotals(){
+  const subtotal = cart.reduce((s,l) => s + l.price*l.qty, 0);
+  const tax = subtotal * TAX_RATE;
+  return {subtotal, tax, total: subtotal+tax};
+}
+function renderCart(){
+  const count = cart.reduce((s,l)=>s+l.qty,0);
+  document.getElementById("cartCount").textContent = count;
+  const body = document.getElementById("drawerBody");
+  const foot = document.getElementById("drawerFoot");
+  if(cart.length === 0){
+    body.innerHTML = `<div class="cart-empty">Your order is empty.<br>Add something from the menu to get started.</div>`;
+    foot.style.display = "none";
+    return;
+  }
+  foot.style.display = "block";
+  body.innerHTML = cart.map(l => `
+    <div class="cart-line">
+      <div class="cl-top"><span>${esc(l.label)}</span><span>${money(l.price*l.qty)}</span></div>
+      <div class="cl-sub">${money(l.price)} each</div>
+      <div class="cl-controls">
+        <button class="qty-btn" data-key="${esc(l.key)}" data-delta="-1">-</button>
+        <span>${l.qty}</span>
+        <button class="qty-btn" data-key="${esc(l.key)}" data-delta="1">+</button>
+        <button class="remove-btn" data-key="${esc(l.key)}">remove</button>
+      </div>
+    </div>
+  `).join("");
+  body.querySelectorAll(".qty-btn").forEach(b => b.addEventListener("click", () => changeQty(b.dataset.key, parseInt(b.dataset.delta))));
+  body.querySelectorAll(".remove-btn").forEach(b => b.addEventListener("click", () => removeLine(b.dataset.key)));
+  const t = cartTotals();
+  document.getElementById("sumSubtotal").textContent = money(t.subtotal);
+  document.getElementById("sumTax").textContent = money(t.tax);
+  document.getElementById("sumTotal").textContent = money(t.total);
+}
+
+function openDrawer(){
+  document.getElementById("cartDrawer").classList.add("open");
+  document.getElementById("overlay").classList.add("open");
+}
+function closeDrawer(){
+  document.getElementById("cartDrawer").classList.remove("open");
+  document.getElementById("overlay").classList.remove("open");
+}
+document.getElementById("openCartBtn").addEventListener("click", openDrawer);
+document.getElementById("closeDrawerBtn").addEventListener("click", closeDrawer);
+document.getElementById("overlay").addEventListener("click", () => { closeDrawer(); closeModal(); });
+
+function openModal(html){
+  document.getElementById("modalContent").innerHTML = html;
+  document.getElementById("modalWrap").classList.add("open");
+}
+function closeModal(){
+  document.getElementById("modalWrap").classList.remove("open");
+}
+
+/* ---------- CHECKOUT ---------- */
+function renderCheckoutForm(){
+  const t = cartTotals();
+  openModal(`
+    <h3>Checkout</h3>
+    <div class="msub">No payment online — pay cash, or by card over the phone. Your total is confirmed by the shop when we confirm your order; prices online may differ slightly from in-store.</div>
+    <div class="group-label">Order type</div>
+    <div class="choice-row" id="typeRow">
+      <button type="button" class="choice-btn active" data-val="pickup">Pickup<small>Ready in ~20 min</small></button>
+      <button type="button" class="choice-btn" data-val="delivery">Delivery<small>Nearby areas</small></button>
+    </div>
+    <div class="group-label">Payment</div>
+    <div class="choice-row" id="payRow">
+      <button type="button" class="choice-btn active" data-val="cash">Cash<small>At the counter / door</small></button>
+      <button type="button" class="choice-btn" data-val="card_by_phone">Card by phone<small>We call you to take it</small></button>
+    </div>
+    <div class="group-label">Your details</div>
+    <div class="field"><label>Name</label><input id="ckName" placeholder="First and last name"></div>
+    <div class="field"><label>Phone (we confirm every order by phone or text)</label><input id="ckPhone" type="tel" placeholder="(201) 555-0100"></div>
+    <div class="field" id="addressField" style="display:none;">
+      <label>Delivery address</label>
+      <input id="ckAddress" placeholder="Street, apt, town">
+    </div>
+    <div class="field"><label>Notes (optional)</label><textarea id="ckNotes" placeholder="No onions, ring the bell, extra napkins…"></textarea></div>
+    <div class="check-row" style="align-items:flex-start;">
+      <input type="checkbox" id="ckAgree" style="margin-top:2px;">
+      <label for="ckAgree" style="margin:0; font-weight:400; color:var(--ink-soft); font-size:12.5px;">
+        I understand my order isn't final until I confirm it by text or answer the shop's confirmation call. Unconfirmed orders are canceled.
+      </label>
+    </div>
+    <div class="err" id="ckErr"></div>
+    <div class="df-row mono" style="font-size:14px;"><span>Order total</span><span><b>${money(t.total)}</b></span></div>
+    <button class="modal-submit" id="submitOrderBtn">Place order</button>
+  `);
+
+  let orderType = "pickup";
+  let payment = "cash";
+  document.querySelectorAll("#typeRow .choice-btn").forEach(b => {
+    b.addEventListener("click", () => {
+      document.querySelectorAll("#typeRow .choice-btn").forEach(x=>x.classList.remove("active"));
+      b.classList.add("active");
+      orderType = b.dataset.val;
+      document.getElementById("addressField").style.display = orderType === "delivery" ? "block" : "none";
+    });
+  });
+  document.querySelectorAll("#payRow .choice-btn").forEach(b => {
+    b.addEventListener("click", () => {
+      document.querySelectorAll("#payRow .choice-btn").forEach(x=>x.classList.remove("active"));
+      b.classList.add("active");
+      payment = b.dataset.val;
+    });
+  });
+
+  document.getElementById("submitOrderBtn").addEventListener("click", () => {
+    const name = document.getElementById("ckName").value.trim();
+    const phone = document.getElementById("ckPhone").value.trim();
+    const address = document.getElementById("ckAddress").value.trim();
+    const notes = document.getElementById("ckNotes").value.trim();
+    const agreed = document.getElementById("ckAgree").checked;
+    const err = document.getElementById("ckErr");
+
+    if(!name || !phone){
+      err.textContent = "Please enter your name and phone number.";
+      err.style.display = "block"; return;
+    }
+    const digits = phone.replace(/\D/g, "");
+    if(digits.length < 10 || digits.length > 11){
+      err.textContent = "Please enter a valid 10-digit phone number — we use it to confirm your order.";
+      err.style.display = "block"; return;
+    }
+    if(orderType === "delivery" && !address){
+      err.textContent = "Please enter a delivery address.";
+      err.style.display = "block"; return;
+    }
+    if(!agreed){
+      err.textContent = "Please check the confirmation box — orders must be confirmed before we start cooking.";
+      err.style.display = "block"; return;
+    }
+    const lastTs = parseInt(localStorage.getItem(COOLDOWN_KEY) || "0");
+    const waitMs = ORDER_COOLDOWN_MINUTES * 60 * 1000;
+    if(Date.now() - lastTs < waitMs){
+      const minsLeft = Math.ceil((waitMs - (Date.now() - lastTs)) / 60000);
+      err.textContent = "You placed an order a few minutes ago. To add to it or make changes, call " + SHOP_DISPLAY_PHONE + " — or try again in ~" + minsLeft + " min.";
+      err.style.display = "block"; return;
+    }
+    err.style.display = "none";
+    submitOrder({name, phone, address, notes, orderType, payment});
+  });
+}
+
+function buildOrderText(info, orderNum){
+  const t = cartTotals();
+  const lines = cart.map(l => `${l.qty}x ${l.label} — ${money(l.price*l.qty)}`).join("\n");
+  return [
+    `NEW ORDER ${orderNum} — Lyndhurst Pizza website`,
+    `STATUS: UNCONFIRMED — verify with customer before making`,
+    ``,
+    lines,
+    ``,
+    `Subtotal: ${money(t.subtotal)}`,
+    `Tax: ${money(t.tax)}`,
+    `TOTAL: ${money(t.total)} (website prices — confirm with customer)`,
+    ``,
+    `Type: ${info.orderType === "pickup" ? "PICKUP" : "DELIVERY"}`,
+    `Payment: ${info.payment === "cash" ? "CASH" : "CARD BY PHONE (call customer)"}`,
+    `Name: ${info.name}`,
+    `Phone: ${info.phone}`,
+    info.address ? `Address: ${info.address}` : null,
+    info.notes ? `Notes: ${info.notes}` : null,
+  ].filter(x => x !== null).join("\n");
+}
+
+async function submitOrder(info){
+  const orderNum = "LP-" + Math.floor(1000 + Math.random()*9000);
+  const orderText = buildOrderText(info, orderNum);
+  const btn = document.getElementById("submitOrderBtn");
+  btn.textContent = "Sending…";
+  btn.classList.add("sending");
+  localStorage.setItem(COOLDOWN_KEY, String(Date.now()));
+
+  let sentByEmail = false;
+  if(ORDER_ENDPOINT){
+    try{
+      const res = await fetch(ORDER_ENDPOINT, {
+        method:"POST",
+        headers:{"Content-Type":"application/json", "Accept":"application/json"},
+        body: JSON.stringify({
+          subject: "NEW ORDER " + orderNum + " — " + info.orderType.toUpperCase(),
+          order: orderText,
+          name: info.name,
+          phone: info.phone
+        })
+      });
+      sentByEmail = res.ok;
+    }catch(e){ sentByEmail = false; }
+  }
+  showConfirmation(info, orderNum, orderText, sentByEmail);
+}
+
+function showConfirmation(info, orderNum, orderText, sentByEmail){
+  const smsBody = orderText + "\n\nCONFIRMED by me — please make this order.";
+  const smsHref = "sms:" + SHOP_SMS_NUMBER + "?&body=" + encodeURIComponent(smsBody);
+
+  const step1 = sentByEmail
+    ? `<b>Step 1 done:</b> your order reached the shop's inbox.`
+    : `<b>Step 1 done:</b> your order ticket is ready below.`;
+
+  openModal(`
+    <div class="confirm-icon" style="background:var(--gold); color:var(--crust);">2</div>
+    <h3 style="text-align:center;">One step left: confirm it's really you</h3>
+    <div class="msub" style="text-align:center;">Order number <strong class="mono">${orderNum}</strong></div>
+
+    <div style="font-size:13.5px; line-height:1.7; background:var(--cream); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:14px;">
+      ${step1}<br>
+      <b>Step 2:</b> confirm from your own phone so we know the order is real.
+      Texting from your number is your confirmation — we don't start cooking without it.
+    </div>
+
+    <a class="modal-submit" style="display:block;text-align:center;text-decoration:none;" href="${smsHref}">Confirm by text — one tap</a>
+    <a class="modal-alt" href="tel:${SHOP_SMS_NUMBER}">Or call ${SHOP_DISPLAY_PHONE} and say "confirming order ${orderNum}"</a>
+
+    <div class="confirm-ticket">${esc(orderText)}</div>
+
+    <div class="confirm-note">
+      Not confirmed within a few minutes? We may call the number you gave — unanswered orders are canceled, no charge, no hard feelings.
+      <br>${info.payment === "cash"
+        ? "Have cash ready " + (info.orderType === "pickup" ? "at the counter." : "for the driver.")
+        : "Keep your phone nearby — we'll take your card number on that call."}
+    </div>
+    <button class="modal-submit" id="closeConfirmBtn" style="margin-top:16px; background:var(--crust);">Done</button>
+  `);
+
+  document.getElementById("closeConfirmBtn").addEventListener("click", () => {
+    cart = [];
+    renderCart();
+    closeModal();
+    closeDrawer();
+  });
+}
+
+document.getElementById("checkoutBtn").addEventListener("click", () => {
+  if(cart.length === 0) return;
+  renderCheckoutForm();
+});
+
+/* =========================================================
+   OWNER MODE
+   ========================================================= */
+function setAdmin(on){
+  isAdmin = on;
+  document.body.classList.toggle("admin", on);
+  document.getElementById("adminBar").classList.toggle("on", on);
+  if(on) sessionStorage.setItem(ADMIN_KEY, "1");
+  else sessionStorage.removeItem(ADMIN_KEY);
+  buildTabsAndMenu();
+}
+
+document.getElementById("ownerLoginLink").addEventListener("click", () => {
+  if(isAdmin){ window.scrollTo({top:0, behavior:"smooth"}); return; }
+  openModal(`
+    <h3>Owner login</h3>
+    <div class="msub">Enter the owner password to edit the menu.</div>
+    <div class="field"><label>Password</label><input id="adminPw" type="password" autocomplete="off"></div>
+    <div class="err" id="pwErr">Wrong password.</div>
+    <button class="modal-submit" id="pwSubmit">Log in</button>
+  `);
+  const submit = () => {
+    const v = document.getElementById("adminPw").value;
+    if(v === ADMIN_PASSWORD){
+      closeModal();
+      setAdmin(true);
+      window.scrollTo({top:0, behavior:"smooth"});
+    } else {
+      document.getElementById("pwErr").style.display = "block";
+    }
+  };
+  document.getElementById("pwSubmit").addEventListener("click", submit);
+  document.getElementById("adminPw").addEventListener("keydown", e => { if(e.key === "Enter") submit(); });
+  document.getElementById("adminPw").focus();
+});
+
+document.getElementById("logoutBtn").addEventListener("click", () => setAdmin(false));
+
+document.getElementById("addCategoryBtn").addEventListener("click", () => {
+  const name = prompt("New category name (e.g. Calzones, Desserts):");
+  if(!name || !name.trim()) return;
+  let key = slug(name);
+  while(MENU[key]) key += "2";
+  MENU[key] = {label: name.trim(), items: []};
+  activeTab = key;
+  saveDraft();
+  buildTabsAndMenu();
+});
+
+document.getElementById("discardBtn").addEventListener("click", async () => {
+  if(!confirm("Discard all unpublished changes on this browser and reload the published menu?")) return;
+  localStorage.removeItem(DRAFT_KEY);
+  updateDraftFlag(false);
+  MENU = JSON.parse(JSON.stringify(DEFAULT_MENU));
+  await loadMenu();
+  buildTabsAndMenu();
+});
+
+document.getElementById("publishBtn").addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify(MENU, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "menu.json";
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+  openModal(`
+    <h3>menu.json downloaded</h3>
+    <div class="msub">To make these changes live for every customer:</div>
+    <ol style="font-size:14px; line-height:1.8; padding-left:20px; margin:0 0 12px;">
+      <li>Go to your website hosting (wherever <span class="mono">index.html</span> lives).</li>
+      <li>Upload the downloaded <span class="mono">menu.json</span> into the <b>same folder</b>, replacing the old one if it exists.</li>
+      <li>Done — the site loads <span class="mono">menu.json</span> automatically on every visit.</li>
+    </ol>
+    <div class="msub">Until you upload it, your edits are only visible on this browser (saved as a draft).</div>
+    <button class="modal-submit" id="pubOk">Got it</button>
+  `);
+  document.getElementById("pubOk").addEventListener("click", closeModal);
+});
+
+/* ---------- ITEM EDITOR ---------- */
+function openItemEditor(catKey, itemIdx){
+  const isNew = itemIdx === null;
+  const item = isNew ? {name:"", desc:"", price:"", sizes:null, pop:false} : MENU[catKey].items[itemIdx];
+  const hasSizes = !!(item.sizes && Object.keys(item.sizes).length);
+  const sizeRows = hasSizes
+    ? Object.entries(item.sizes).map(([s,p]) => sizeRowHtml(s,p)).join("")
+    : sizeRowHtml("","") ;
+
+  openModal(`
+    <h3>${isNew ? "Add item" : "Edit item"}</h3>
+    <div class="msub">Category: <b>${esc(MENU[catKey].label)}</b></div>
+    <div class="field"><label>Item name</label><input id="itName" value="${esc(item.name)}" placeholder="e.g. Buffalo chicken pie"></div>
+    <div class="field"><label>Description</label><textarea id="itDesc" placeholder="Short description customers will see">${esc(item.desc || "")}</textarea></div>
+    <div class="check-row"><input type="checkbox" id="itPop" ${item.pop ? "checked" : ""}><label for="itPop" style="margin:0;">Mark as "Popular"</label></div>
+    <div class="group-label">Pricing</div>
+    <div class="choice-row" id="priceModeRow">
+      <button type="button" class="choice-btn ${hasSizes ? "" : "active"}" data-val="single">One price</button>
+      <button type="button" class="choice-btn ${hasSizes ? "active" : ""}" data-val="sizes">Multiple sizes</button>
+    </div>
+    <div class="field" id="singlePriceWrap" style="display:${hasSizes ? "none" : "block"};">
+      <label>Price ($)</label><input id="itPrice" type="number" step="0.25" min="0" value="${item.price || ""}" placeholder="9.50">
+    </div>
+    <div id="sizesWrap" class="sizes-editor" style="display:${hasSizes ? "block" : "none"};">
+      <div id="sizeRows">${sizeRows}</div>
+      <button type="button" class="link-btn" id="addSizeRow">+ Add another size</button>
+      <div class="field"><div class="hint">Example: Small 12" / 11.50 — Medium 14" / 15.00 — Large 16" / 18.00</div></div>
+    </div>
+    <div class="err" id="itErr"></div>
+    <button class="modal-submit" id="saveItemBtn">${isNew ? "Add to menu" : "Save changes"}</button>
+  `);
+
+  let priceMode = hasSizes ? "sizes" : "single";
+  document.querySelectorAll("#priceModeRow .choice-btn").forEach(b => {
+    b.addEventListener("click", () => {
+      document.querySelectorAll("#priceModeRow .choice-btn").forEach(x=>x.classList.remove("active"));
+      b.classList.add("active");
+      priceMode = b.dataset.val;
+      document.getElementById("singlePriceWrap").style.display = priceMode === "single" ? "block" : "none";
+      document.getElementById("sizesWrap").style.display = priceMode === "sizes" ? "block" : "none";
+    });
+  });
+  document.getElementById("addSizeRow").addEventListener("click", () => {
+    document.getElementById("sizeRows").insertAdjacentHTML("beforeend", sizeRowHtml("",""));
+    wireSizeRemove();
+  });
+  wireSizeRemove();
+
+  document.getElementById("saveItemBtn").addEventListener("click", () => {
+    const name = document.getElementById("itName").value.trim();
+    const desc = document.getElementById("itDesc").value.trim();
+    const pop = document.getElementById("itPop").checked;
+    const err = document.getElementById("itErr");
+
+    if(!name){ err.textContent = "Please enter an item name."; err.style.display = "block"; return; }
+
+    let newItem = {id: isNew ? slug(name) + "_" + Date.now().toString(36) : item.id, name, desc, pop};
+
+    if(priceMode === "single"){
+      const p = parseFloat(document.getElementById("itPrice").value);
+      if(isNaN(p) || p < 0){ err.textContent = "Please enter a valid price."; err.style.display = "block"; return; }
+      newItem.price = Math.round(p*100)/100;
+    } else {
+      const sizes = {};
+      document.querySelectorAll("#sizeRows .size-row").forEach(row => {
+        const label = row.querySelector(".sz-label").value.trim();
+        const price = parseFloat(row.querySelector(".sz-price").value);
+        if(label && !isNaN(price) && price >= 0) sizes[label] = Math.round(price*100)/100;
+      });
+      if(Object.keys(sizes).length === 0){
+        err.textContent = "Add at least one size with a name and price."; err.style.display = "block"; return;
+      }
+      newItem.sizes = sizes;
+    }
+
+    if(isNew) MENU[catKey].items.push(newItem);
+    else MENU[catKey].items[itemIdx] = newItem;
+    saveDraft();
+    closeModal();
+    buildTabsAndMenu();
+  });
+}
+
+function sizeRowHtml(label, price){
+  return `<div class="size-row">
+    <input class="sz-label" placeholder='Size name (e.g. Large 16")' value="${esc(label)}">
+    <input class="sz-price" type="number" step="0.25" min="0" placeholder="18.00" value="${price !== "" ? price : ""}">
+    <button type="button" class="mini-btn danger sz-del">×</button>
+  </div>`;
+}
+function wireSizeRemove(){
+  document.querySelectorAll(".sz-del").forEach(b => {
+    b.onclick = () => {
+      const rows = document.querySelectorAll("#sizeRows .size-row");
+      if(rows.length > 1) b.closest(".size-row").remove();
+      else { b.closest(".size-row").querySelector(".sz-label").value = ""; b.closest(".size-row").querySelector(".sz-price").value = ""; }
+    };
+  });
+}
+
+/* ---------- INIT ---------- */
+(async function init(){
+  await loadMenu();
+  buildTabsAndMenu();
+  renderCart();
+  if(sessionStorage.getItem(ADMIN_KEY) === "1") setAdmin(true);
+})();
+</script>
+
+</body>
+</html>

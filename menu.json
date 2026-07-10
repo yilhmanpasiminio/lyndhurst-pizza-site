@@ -1,0 +1,880 @@
+{
+  "pizza": {
+    "label": "Pizza",
+    "items": [
+      {
+        "id": "pz_cheese",
+        "name": "Cheese pizza",
+        "desc": "Classic cheese pie.",
+        "sizes": {
+          "12\"": 13.99,
+          "16\"": 16.99,
+          "18\"": 19.99
+        },
+        "pop": true
+      },
+      {
+        "id": "pz_sicilian",
+        "name": "Sicilian pizza",
+        "desc": "Thick square pie, 16\" x 16\".",
+        "price": 20.99,
+        "pop": true
+      },
+      {
+        "id": "tp_extra_reg",
+        "name": "Extra regular topping",
+        "desc": "Extra cheese, onion, mushrooms, ham, green peppers, meatball, olives, spinach, garlic, broccoli, eggplant, pepperoni, hot pepper, sausage. Write your topping in the order notes.",
+        "sizes": {
+          "12\"": 3,
+          "16\"": 3,
+          "18\"": 4
+        }
+      },
+      {
+        "id": "tp_half_reg",
+        "name": "Half regular topping",
+        "desc": "Any regular topping on half the pie. Write your topping in the order notes.",
+        "sizes": {
+          "12\"": 2.5,
+          "16\"": 2.5,
+          "18\"": 3
+        }
+      },
+      {
+        "id": "tp_extra_gourmet",
+        "name": "Extra gourmet topping",
+        "desc": "Grilled chicken, chicken cutlet, roasted pepper, artichokes, sun dried tomato, anchovies, bacon, pineapple. Write your topping in the order notes.",
+        "sizes": {
+          "12\"": 4.5,
+          "16\"": 4.5,
+          "18\"": 5.5
+        }
+      },
+      {
+        "id": "tp_half_gourmet",
+        "name": "Half gourmet topping",
+        "desc": "Any gourmet topping on half the pie. Write your topping in the order notes.",
+        "sizes": {
+          "12\"": 4,
+          "16\"": 4,
+          "18\"": 4.5
+        }
+      }
+    ]
+  },
+  "specialty": {
+    "label": "Specialty pizzas",
+    "items": [
+      {
+        "id": "sp_supreme",
+        "name": "Supreme pizza",
+        "desc": "Pepperoni, black olives, mushrooms, green peppers.",
+        "sizes": {
+          "12\"": 19.99,
+          "16\"": 23.99,
+          "18\"": 27.99
+        },
+        "pop": true
+      },
+      {
+        "id": "sp_special",
+        "name": "Special pizza",
+        "desc": "Pepperoni, sausage, onion, mushrooms, tomatoes & tomato sauce.",
+        "sizes": {
+          "12\"": 19.99,
+          "16\"": 23.99,
+          "18\"": 27.99
+        }
+      },
+      {
+        "id": "sp_veggie",
+        "name": "Veggie lovers pizza",
+        "desc": "Tomato, onion, mushrooms, black olives, green pepper.",
+        "sizes": {
+          "12\"": 19.99,
+          "16\"": 23.99,
+          "18\"": 27.99
+        }
+      },
+      {
+        "id": "sp_meat",
+        "name": "Meat lovers pizza",
+        "desc": "Pepperoni, bacon, meatball, sausage.",
+        "sizes": {
+          "12\"": 19.99,
+          "16\"": 23.99,
+          "18\"": 27.99
+        },
+        "pop": true
+      },
+      {
+        "id": "sp_steak",
+        "name": "Steak & cheese pizza",
+        "desc": "Philly steak, onion, peppers, cheese & mushrooms.",
+        "sizes": {
+          "12\"": 19.99,
+          "16\"": 23.99,
+          "18\"": 27.99
+        }
+      },
+      {
+        "id": "sp_greek",
+        "name": "Greek style pizza",
+        "desc": "Tomato, red onion, black olives, feta & mozzarella cheese.",
+        "sizes": {
+          "12\"": 19.99,
+          "16\"": 23.99,
+          "18\"": 27.99
+        }
+      },
+      {
+        "id": "sp_white",
+        "name": "White pizza",
+        "desc": "Ricotta & mozzarella cheese.",
+        "sizes": {
+          "12\"": 19.99,
+          "16\"": 23.99,
+          "18\"": 27.99
+        }
+      },
+      {
+        "id": "sp_spinach_white",
+        "name": "Spinach or broccoli white pizza",
+        "desc": "Ricotta & mozzarella with spinach or broccoli — say which in order notes.",
+        "sizes": {
+          "12\"": 19.99,
+          "16\"": 23.99,
+          "18\"": 27.99
+        }
+      },
+      {
+        "id": "sp_cheese_lovers",
+        "name": "Cheese lovers pizza",
+        "desc": "Mozzarella, ricotta, provolone & American cheese.",
+        "sizes": {
+          "12\"": 19.99,
+          "16\"": 23.99,
+          "18\"": 27.99
+        }
+      },
+      {
+        "id": "sp_hawaiian",
+        "name": "Hawaiian pizza",
+        "desc": "Ham, pineapple, mozzarella cheese.",
+        "sizes": {
+          "12\"": 19.99,
+          "16\"": 23.99,
+          "18\"": 27.99
+        }
+      },
+      {
+        "id": "sp_clams",
+        "name": "Baby clams pizza",
+        "desc": "Bacon, clams, garlic & mozzarella cheese.",
+        "sizes": {
+          "12\"": 19.99,
+          "16\"": 23.99,
+          "18\"": 27.99
+        }
+      },
+      {
+        "id": "sp_margarita",
+        "name": "Margarita pizza",
+        "desc": "Fresh mozzarella, tomato sauce & basil.",
+        "sizes": {
+          "12\"": 19.99,
+          "16\"": 23.99,
+          "18\"": 27.99
+        }
+      },
+      {
+        "id": "sp_chicken_parm",
+        "name": "Chicken parm pizza",
+        "desc": "Chicken cutlets over tomato sauce & mozzarella cheese.",
+        "sizes": {
+          "12\"": 19.99,
+          "16\"": 23.99,
+          "18\"": 27.99
+        }
+      },
+      {
+        "id": "sp_bruschetta",
+        "name": "Bruschetta pizza",
+        "desc": "Chopped tomatoes with onion, garlic, fresh basil.",
+        "sizes": {
+          "12\"": 19.99,
+          "16\"": 23.99,
+          "18\"": 27.99
+        }
+      },
+      {
+        "id": "sp_buffalo",
+        "name": "Buffalo chicken pizza",
+        "desc": "Fried chicken, hot sauce & blue cheese.",
+        "sizes": {
+          "12\"": 19.99,
+          "16\"": 23.99,
+          "18\"": 27.99
+        },
+        "pop": true
+      },
+      {
+        "id": "sp_grilled_chicken",
+        "name": "Grilled chicken pizza",
+        "desc": "Grilled chicken, tomato sauce & mozzarella.",
+        "sizes": {
+          "12\"": 19.99,
+          "16\"": 23.99,
+          "18\"": 27.99
+        }
+      },
+      {
+        "id": "sp_cowboy",
+        "name": "Cowboy pizza",
+        "desc": "Fried chicken, bacon, ranch & mozzarella cheese.",
+        "sizes": {
+          "12\"": 19.99,
+          "16\"": 23.99,
+          "18\"": 27.99
+        }
+      },
+      {
+        "id": "sp_grandma",
+        "name": "Grandma pizza",
+        "desc": "Marinara sauce, fresh mozzarella & fresh basil.",
+        "sizes": {
+          "12\"": 19.99,
+          "16\"": 23.99,
+          "18\"": 27.99
+        }
+      },
+      {
+        "id": "sp_vodka",
+        "name": "Drunken penne vodka pizza",
+        "desc": "Penne alla vodka on a pie.",
+        "sizes": {
+          "12\"": 19.99,
+          "16\"": 23.99,
+          "18\"": 27.99
+        }
+      }
+    ]
+  },
+  "calzones": {
+    "label": "Calzones",
+    "items": [
+      {
+        "id": "cz_cheese",
+        "name": "Cheese calzone",
+        "desc": "Mozzarella & ricotta cheese.",
+        "price": 12.99,
+        "pop": true
+      },
+      {
+        "id": "cz_ham",
+        "name": "Ham calzone",
+        "desc": "Ham, mozzarella & ricotta cheese.",
+        "price": 13.99
+      },
+      {
+        "id": "cz_chicken",
+        "name": "Chicken calzone",
+        "desc": "Chicken, mozzarella & ricotta cheese.",
+        "price": 13.99
+      }
+    ]
+  },
+  "pastas": {
+    "label": "Pastas",
+    "items": [
+      {
+        "id": "pa_tomato",
+        "name": "Pasta with tomato sauce",
+        "desc": "Choose spaghetti, penne, linguini, or fettuccini — write your choice in the order notes.",
+        "price": 12.99
+      },
+      {
+        "id": "pa_butter_garlic",
+        "name": "Pasta with butter and garlic",
+        "desc": "Choose spaghetti, penne, linguini, or fettuccini.",
+        "price": 13.99
+      },
+      {
+        "id": "pa_meatball",
+        "name": "Pasta with meatball",
+        "desc": "Choose spaghetti, penne, linguini, or fettuccini.",
+        "price": 16.99
+      },
+      {
+        "id": "pa_meatball_parm",
+        "name": "Pasta with meatball parm",
+        "desc": "Choose spaghetti, penne, linguini, or fettuccini.",
+        "price": 18.99
+      },
+      {
+        "id": "pa_sausage",
+        "name": "Pasta with sausage",
+        "desc": "Choose spaghetti, penne, linguini, or fettuccini.",
+        "price": 16.99
+      },
+      {
+        "id": "pa_sausage_parm",
+        "name": "Pasta with sausage parm",
+        "desc": "Choose spaghetti, penne, linguini, or fettuccini.",
+        "price": 18.99
+      },
+      {
+        "id": "pa_eggplant",
+        "name": "Pasta with eggplant",
+        "desc": "Choose spaghetti, penne, linguini, or fettuccini.",
+        "price": 16.99
+      },
+      {
+        "id": "pa_broccoli",
+        "name": "Pasta with broccoli",
+        "desc": "With butter in a light garlic sauce.",
+        "price": 16.99
+      },
+      {
+        "id": "pa_bolognese",
+        "name": "Pasta with bolognese sauce",
+        "desc": "Choose spaghetti, penne, linguini, or fettuccini.",
+        "price": 18.99
+      },
+      {
+        "id": "pa_alfredo",
+        "name": "Fettuccine Alfredo",
+        "desc": "With aged romano in a rich cream sauce.",
+        "price": 17.99,
+        "pop": true
+      },
+      {
+        "id": "pa_alfredo_chicken",
+        "name": "Fettuccine Alfredo with chicken",
+        "desc": "With grilled or fried chicken.",
+        "price": 20.99
+      },
+      {
+        "id": "pa_vodka",
+        "name": "Penne alla vodka",
+        "desc": "Classic pink vodka sauce.",
+        "price": 16.99,
+        "pop": true
+      },
+      {
+        "id": "pa_vodka_chicken",
+        "name": "Penne alla vodka with chicken",
+        "desc": "With grilled or fried chicken.",
+        "price": 20.99
+      },
+      {
+        "id": "pa_rollatini",
+        "name": "Eggplant rollatini",
+        "desc": "Rolled eggplant with ricotta, baked in sauce.",
+        "price": 16.99
+      },
+      {
+        "id": "pa_eggplant_parm",
+        "name": "Eggplant parm",
+        "desc": "Breaded eggplant baked with sauce & mozzarella.",
+        "price": 17.99
+      },
+      {
+        "id": "pa_meat_ravioli",
+        "name": "Meat ravioli parm",
+        "desc": "Baked with sauce & mozzarella.",
+        "price": 17.99
+      },
+      {
+        "id": "pa_cheese_ravioli",
+        "name": "Cheese ravioli parm",
+        "desc": "Baked with sauce & mozzarella.",
+        "price": 17.99
+      },
+      {
+        "id": "pa_manicotti",
+        "name": "Manicotti",
+        "desc": "Cheese-filled pasta baked in sauce.",
+        "price": 17.99
+      },
+      {
+        "id": "pa_shells",
+        "name": "Stuffed shells",
+        "desc": "Ricotta-stuffed shells baked in sauce.",
+        "price": 17.99
+      },
+      {
+        "id": "pa_ziti",
+        "name": "Baked ziti",
+        "desc": "Ziti, ricotta & marinara baked with mozzarella.",
+        "price": 17.99
+      },
+      {
+        "id": "pa_lasagna",
+        "name": "Lasagna",
+        "desc": "Layered pasta baked with meat sauce & cheese.",
+        "price": 17.99
+      },
+      {
+        "id": "pa_add_chicken",
+        "name": "Add grilled or fried chicken to any pasta",
+        "desc": "Add-on — say which pasta in the order notes.",
+        "price": 4
+      },
+      {
+        "id": "pa_add_shrimp",
+        "name": "Add grilled or fried shrimp to any pasta",
+        "desc": "Add-on — say which pasta in the order notes.",
+        "price": 6.5
+      },
+      {
+        "id": "pa_add_salad",
+        "name": "Add small tossed salad",
+        "desc": "Side salad add-on.",
+        "price": 3.99
+      }
+    ]
+  },
+  "chicken_veal": {
+    "label": "Chicken & veal",
+    "items": [
+      {
+        "id": "cv_parm",
+        "name": "Parmigiana",
+        "desc": "Tomato sauce & cheese. Served with pasta: spaghetti, penne, linguini, or fettuccini.",
+        "sizes": {
+          "Chicken": 17.99,
+          "Veal": 20.99
+        },
+        "pop": true
+      },
+      {
+        "id": "cv_francese",
+        "name": "Francese",
+        "desc": "Lemon butter sauce.",
+        "sizes": {
+          "Chicken": 18.99,
+          "Veal": 21.99
+        }
+      },
+      {
+        "id": "cv_marsala",
+        "name": "Marsala",
+        "desc": "Sautéed with mushrooms in a Marsala wine sauce.",
+        "sizes": {
+          "Chicken": 18.99,
+          "Veal": 21.99
+        }
+      },
+      {
+        "id": "cv_piccata",
+        "name": "Piccata",
+        "desc": "With capers & white wine sauce.",
+        "sizes": {
+          "Chicken": 18.99,
+          "Veal": 21.99
+        }
+      },
+      {
+        "id": "cv_murphy",
+        "name": "Murphy",
+        "desc": "Onion, pepper, mushrooms & potatoes with a light garlic and white wine sauce.",
+        "sizes": {
+          "Chicken": 18.99,
+          "Veal": 21.99
+        }
+      },
+      {
+        "id": "cv_sorrentino",
+        "name": "Sorrentino",
+        "desc": "Topped with eggplant in a light marinara sauce.",
+        "sizes": {
+          "Chicken": 18.99,
+          "Veal": 21.99
+        }
+      },
+      {
+        "id": "cv_florentine",
+        "name": "Florentine",
+        "desc": "Sautéed with spinach, topped with mozzarella.",
+        "sizes": {
+          "Chicken": 18.99,
+          "Veal": 21.99
+        }
+      },
+      {
+        "id": "cv_bruschetta",
+        "name": "Bruschetta",
+        "desc": "Lightly fried, topped with tomato & julienne onion in a virgin olive oil dressing.",
+        "sizes": {
+          "Chicken": 18.99,
+          "Veal": 21.99
+        }
+      },
+      {
+        "id": "cv_dicasa",
+        "name": "Di casa sautéed",
+        "desc": "With mushrooms, artichokes & sun dried tomatoes in a white wine sauce.",
+        "sizes": {
+          "Chicken": 18.99,
+          "Veal": 21.99
+        }
+      }
+    ]
+  },
+  "subs": {
+    "label": "Hot & cold subs",
+    "items": [
+      {
+        "id": "sb_grilled_chicken",
+        "name": "Grilled chicken sub",
+        "desc": "Roasted peppers, sun dried tomatoes, fresh mozzarella, lettuce & balsamic.",
+        "price": 12.99
+      },
+      {
+        "id": "sb_cheesesteak",
+        "name": "Cheese steak sub",
+        "desc": "Peppers & onion.",
+        "price": 12.99,
+        "pop": true
+      },
+      {
+        "id": "sb_chicken_cheesesteak",
+        "name": "Chicken cheese steak sub",
+        "desc": "Peppers & onion.",
+        "price": 12.99
+      },
+      {
+        "id": "sb_eggplant_parm",
+        "name": "Eggplant parmigiana sub",
+        "desc": "Breaded eggplant, sauce & mozzarella.",
+        "price": 12.99
+      },
+      {
+        "id": "sb_chicken_parm",
+        "name": "Chicken parmigiana sub",
+        "desc": "Chicken cutlet, sauce & melted mozzarella.",
+        "price": 12.99,
+        "pop": true
+      },
+      {
+        "id": "sb_chicken_francese",
+        "name": "Chicken francese sub",
+        "desc": "In lemon butter sauce.",
+        "price": 13.99
+      },
+      {
+        "id": "sb_chicken_marsala",
+        "name": "Chicken marsala sub",
+        "desc": "With mushrooms in Marsala wine sauce.",
+        "price": 13.99
+      },
+      {
+        "id": "sb_chicken_cutlet",
+        "name": "Chicken cutlet sub",
+        "desc": "Lettuce, tomato & mayo.",
+        "price": 12.99
+      },
+      {
+        "id": "sb_buffalo_chicken",
+        "name": "Buffalo chicken sub",
+        "desc": "Lettuce, tomato & blue cheese.",
+        "price": 12.99
+      },
+      {
+        "id": "sb_veal_parm",
+        "name": "Veal parmigiana sub",
+        "desc": "Veal cutlet, sauce & melted mozzarella.",
+        "price": 14.99
+      },
+      {
+        "id": "sb_veal_cutlet",
+        "name": "Veal cutlet sub",
+        "desc": "Lettuce, tomato & mayo.",
+        "price": 14.99
+      },
+      {
+        "id": "sb_meatball",
+        "name": "Meatball sub",
+        "desc": "House meatballs in sauce.",
+        "price": 12.99
+      },
+      {
+        "id": "sb_meatball_parm",
+        "name": "Meatball parmigiana sub",
+        "desc": "Meatballs in sauce, baked with mozzarella.",
+        "price": 12.99
+      },
+      {
+        "id": "sb_sausage",
+        "name": "Sausage sub",
+        "desc": "Italian sausage in sauce.",
+        "price": 12.99
+      },
+      {
+        "id": "sb_sausage_parm",
+        "name": "Sausage parmigiana sub",
+        "desc": "Sausage in sauce, baked with mozzarella.",
+        "price": 12.99
+      },
+      {
+        "id": "sb_tuna",
+        "name": "Tuna and cheese sub",
+        "desc": "Lettuce, tomato & mayo.",
+        "price": 12.99
+      },
+      {
+        "id": "sb_ham_salami",
+        "name": "Ham, salami & provolone sub",
+        "desc": "Lettuce, tomato & mayo.",
+        "price": 12.99
+      },
+      {
+        "id": "sb_turkey",
+        "name": "Turkey & cheese sub",
+        "desc": "Lettuce, tomato & mayo.",
+        "price": 12.99
+      },
+      {
+        "id": "sb_hot_dog",
+        "name": "Italian hot dog sub",
+        "desc": "With peppers, onions & potatoes.",
+        "price": 12.99
+      },
+      {
+        "id": "sb_fat_moose",
+        "name": "Fat Moose sub",
+        "desc": "Chicken cutlet, fresh mozzarella, lettuce, tomato, mayo, onion rings & mozzarella sticks.",
+        "price": 15.99
+      },
+      {
+        "id": "sb_fat_mike",
+        "name": "Fat Mike sub",
+        "desc": "Chicken cutlet, pepperoni, mozzarella cheese, onion rings, french fries & mozzarella sticks.",
+        "price": 15.99
+      },
+      {
+        "id": "sb_fat_billy",
+        "name": "Fat Billy sub",
+        "desc": "Beef steak, chicken steak, french fries, peppers, onion, American & mozzarella cheese.",
+        "price": 15.99
+      },
+      {
+        "id": "sb_veggie",
+        "name": "Grilled veggie sub",
+        "desc": "Eggplant, zucchini, mushrooms, roasted peppers, fresh mozzarella with balsamic dressing.",
+        "price": 12.99
+      }
+    ]
+  },
+  "wraps": {
+    "label": "Wraps",
+    "items": [
+      {
+        "id": "wr_cheesesteak",
+        "name": "Cheese steak wrap",
+        "desc": "Peppers & onion. Served with french fries — plain or whole wheat wrap.",
+        "price": 12.99
+      },
+      {
+        "id": "wr_chicken_cheesesteak",
+        "name": "Chicken cheese steak wrap",
+        "desc": "Peppers & onion. Served with french fries.",
+        "price": 12.99
+      },
+      {
+        "id": "wr_chicken_parm",
+        "name": "Chicken parmesan wrap",
+        "desc": "Served with french fries.",
+        "price": 12.99
+      },
+      {
+        "id": "wr_ham",
+        "name": "Ham & American wrap",
+        "desc": "Lettuce, tomato, onion & mayo. Served with french fries.",
+        "price": 12.99
+      },
+      {
+        "id": "wr_tuna",
+        "name": "Tuna fish wrap",
+        "desc": "Lettuce, tomato, onion, oil & vinegar. Served with french fries.",
+        "price": 12.99
+      },
+      {
+        "id": "wr_buffalo",
+        "name": "Buffalo chicken wrap",
+        "desc": "Lettuce, tomato & blue cheese. Served with french fries.",
+        "price": 12.99
+      },
+      {
+        "id": "wr_grilled_mozz",
+        "name": "Grilled chicken fresh mozzarella wrap",
+        "desc": "Roasted peppers, sun dried tomatoes, lettuce & balsamic. Served with french fries.",
+        "price": 12.99
+      },
+      {
+        "id": "wr_tender",
+        "name": "Chicken tender wrap",
+        "desc": "Lettuce, tomato & honey mustard. Served with french fries.",
+        "price": 12.99
+      },
+      {
+        "id": "wr_caesar",
+        "name": "Grilled chicken Caesar wrap",
+        "desc": "Romaine lettuce & Caesar dressing. Served with french fries.",
+        "price": 12.99
+      }
+    ]
+  },
+  "grill": {
+    "label": "From the grill",
+    "items": [
+      {
+        "id": "gr_hamburger",
+        "name": "Hamburger",
+        "desc": "Served with lettuce, tomato, mayo & french fries.",
+        "price": 10.99
+      },
+      {
+        "id": "gr_cheeseburger",
+        "name": "Cheeseburger",
+        "desc": "Served with lettuce, tomato, mayo & french fries.",
+        "price": 13.99
+      },
+      {
+        "id": "gr_double",
+        "name": "Double cheese burger",
+        "desc": "Served with lettuce, tomato, mayo & french fries.",
+        "price": 14.99
+      },
+      {
+        "id": "gr_fat_kenny",
+        "name": "Fat Kenny",
+        "desc": "Burger patty & grilled chicken. Served with fries.",
+        "price": 14.99
+      },
+      {
+        "id": "gr_gyro",
+        "name": "Gyro",
+        "desc": "Served in pita bread with lettuce, tomato, onion & tzatziki sauce.",
+        "price": 12.99
+      }
+    ]
+  },
+  "soups_more": {
+    "label": "Soups & mussels",
+    "items": [
+      {
+        "id": "so_fagioli",
+        "name": "Pasta fagioli",
+        "desc": "Hearty Italian bean & pasta soup.",
+        "price": 6.99
+      },
+      {
+        "id": "so_chicken",
+        "name": "Chicken soup",
+        "desc": "Homestyle chicken soup.",
+        "price": 6.99
+      },
+      {
+        "id": "so_minestrone",
+        "name": "Minestrone",
+        "desc": "Classic vegetable soup.",
+        "price": 6.99
+      },
+      {
+        "id": "mu_mussels",
+        "name": "Mussels",
+        "desc": "Red or white wine sauce — say which in order notes.",
+        "sizes": {
+          "5 pieces": 7.99,
+          "10 pieces": 14.99,
+          "15 pieces": 21.99
+        }
+      }
+    ]
+  },
+  "desserts": {
+    "label": "Desserts",
+    "items": [
+      {
+        "id": "de_cheesecake",
+        "name": "Cheesecake",
+        "desc": "",
+        "price": 6.99
+      },
+      {
+        "id": "de_carrot",
+        "name": "Carrot cake",
+        "desc": "",
+        "price": 6.99
+      },
+      {
+        "id": "de_tiramisu",
+        "name": "Tiramisu",
+        "desc": "",
+        "price": 6.99,
+        "pop": true
+      },
+      {
+        "id": "de_tres_leche",
+        "name": "Tres leche",
+        "desc": "",
+        "price": 6.99
+      },
+      {
+        "id": "de_chocolate",
+        "name": "Chocolate cake",
+        "desc": "",
+        "price": 6.99
+      },
+      {
+        "id": "de_oreo",
+        "name": "Oreo cake",
+        "desc": "",
+        "price": 6.99
+      },
+      {
+        "id": "de_cannoli",
+        "name": "Cannoli",
+        "desc": "",
+        "price": 6.99
+      },
+      {
+        "id": "de_rice_pudding",
+        "name": "Rice pudding",
+        "desc": "",
+        "price": 6.99
+      }
+    ]
+  },
+  "drinks": {
+    "label": "Drinks",
+    "items": [
+      {
+        "id": "dr_water",
+        "name": "Bottled water",
+        "desc": "",
+        "price": 2
+      },
+      {
+        "id": "dr_2l",
+        "name": "2 liter soda",
+        "desc": "Pepsi, Diet Pepsi, Mountain Dew, or Orange — say which in order notes.",
+        "price": 4.99
+      },
+      {
+        "id": "dr_sm_bottle",
+        "name": "Small bottled soda",
+        "desc": "Pepsi, Diet Pepsi, Mountain Dew, Orange, Ginger Ale, or Iced Tea.",
+        "price": 2.99
+      },
+      {
+        "id": "dr_can",
+        "name": "Canned soda",
+        "desc": "Coke, Diet Coke, Pepsi, or Sprite.",
+        "price": 2
+      }
+    ]
+  }
+}
